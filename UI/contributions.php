@@ -1,7 +1,7 @@
 <?php
 $contributor = $_GET["user"];
 
-include_once( dirname(__FILE__) . "/../source/phpfiles/utils/weha/WikiDiffFormatter.php");
+include_once( dirname(__FILE__) . "/../source/phpfiles/weha/WikiDiffFormatter.php");
 
 function ShowDiff($oldText, $newText){
 	//$myFile = "NewText.txt";
