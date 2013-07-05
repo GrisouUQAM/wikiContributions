@@ -23,7 +23,7 @@ header h1 {
 	display: none;
 }
 
-#user {
+#user, #url {
     width: 600px; 
 }
 
