@@ -1,9 +1,11 @@
-$(function () {       
-    $('#sendRequest').click(function(){        
-        $.ajax({
-            url: "contributions.php?user="+$("#user").val()
-        }).done(function ( data ) {
-            $("#result").html(data);
+function sendForm() {
+	var sent = false;
+	var us = document.getElementById("user").value;
+	var ur = document.getElementById("url").value;
+	
+	
+	$.get("contributions.php", { user: us, wiki: ur}, function (data) {
+		$("#result").html(data);
             var values = [],
 			labels = [];
 			$("tr").each(function () {
@@ -11,6 +13,6 @@ $(function () {
 				labels.push($("th", this).text());
 			});
             $("#result").fadeIn(500);
-        });    
-    });    
-});
+		} );
+return sent;
+}

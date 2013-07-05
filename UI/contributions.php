@@ -1,5 +1,11 @@
 <?php
 $contributor = $_GET["user"];
+$wikiurl = $_GET["wiki"];
+
+$withoutSlash = explode('/', $wikiurl);
+$url = $withoutSlash[0];
+$completeUrl = "http://";
+$completeUrl.= $url;
 
 include_once( dirname(__FILE__) . "/../source/weha/WikiDiffFormatter.php");
 
@@ -20,7 +26,7 @@ function ShowDiff($oldText, $newText){
 	return $analysis;
 }
 
-$jsonurl = "http://fr.wikipedia.org/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
+$jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
 $json = file_get_contents($jsonurl, true);
 
 $obj = json_decode($json, true);
@@ -50,7 +56,7 @@ $test = "";
 $result = '<h1>Articles which '.$contributor.' contributed to</h1>
             <table>
 				<tr>            
-					<th>Articles</th>
+					<th>Articles from '.$completeUrl.'</th>
 					<th>How long did the edit survive?</th>
 					<th>Edits</th>
 					<th>What is the value of the contribution?</th>					
@@ -61,7 +67,7 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
 foreach ($usercontributions as $contribution) {
 	$result .= '<tr><td>'.$contribution['title'].'</td>';
 	$pageId = $contribution['pageid'];
-	$revurl = "http://fr.wikipedia.org/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser&rvuser=".$contributor."&pageids=".$pageId."";
+	$revurl = $completeUrl."/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser&rvuser=".$contributor."&pageids=".$pageId."";
 	$json = file_get_contents($revurl, true);
 	$obj = json_decode($json, true);	
 	$queries = $obj['query'];
@@ -74,13 +80,13 @@ foreach ($usercontributions as $contribution) {
 		$usertimestamp = $temp['timestamp'];
 	}	
 	
-	$oldRevisionContent = "http://fr.wikipedia.org/w/api.php?action=parse&format=json&oldid=".$oldVersion."&prop=text";
+	$oldRevisionContent = $completeUrl."/w/api.php?action=parse&format=json&oldid=".$oldVersion."&prop=text";
 	$jsonOld = file_get_contents($oldRevisionContent, true);
 	$oldTextDecoded = json_decode($jsonOld, true);	
 	$parsedOldText = $oldTextDecoded['parse'];
 	$oldTextText = $parsedOldText['text'];
 	$oldText = $oldTextText['*'];
-	$userRevisionContent = "http://fr.wikipedia.org/w/api.php?action=parse&format=json&oldid=".$userVersion."&prop=text";
+	$userRevisionContent = $completeUrl."/w/api.php?action=parse&format=json&oldid=".$userVersion."&prop=text";
 	$jsonNew = file_get_contents($userRevisionContent, true);
 	$newTextDecoded = json_decode($jsonNew, true);	
 	$parsedNewText = $newTextDecoded['parse'];
@@ -93,7 +99,7 @@ foreach ($usercontributions as $contribution) {
 	
 	/////////////////////////// Timestamps comparisons /////////////////////////////////////				
 	
-	$oldVersionTimeUrl = "http://fr.wikipedia.org/w/api.php?action=query&prop=info&format=json&inprop=notificationtimestamp&revids=".$oldVersion."&converttitles=";
+	$oldVersionTimeUrl = $completeUrl."/w/api.php?action=query&prop=info&format=json&inprop=notificationtimestamp&revids=".$oldVersion."&converttitles=";
 	$jsonSecondTimeQuery = file_get_contents($oldVersionTimeUrl, true);	
 	$object = json_decode($jsonSecondTimeQuery, true);
 	$queries = $object['query'];
