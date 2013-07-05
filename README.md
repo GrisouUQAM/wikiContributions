@@ -12,8 +12,8 @@ Code provided for revision comparisons comes from [WEHA] (http://sourceforge.net
 ## Creators
 
 * Robert Dupuis
-* Louise Laforest
 * Anne Goldenberg
+* Louise Laforest
 
 ## Developers
 
@@ -22,12 +22,12 @@ Code provided for revision comparisons comes from [WEHA] (http://sourceforge.net
 
 ## Contributors
 
-* Sylvie Trudel
-* Nguyen Tho Hau
 * Laurence Loiselle Dupuis
-* Normand Seguin
 * Melanie Lord
 * Daniel Memmi
+* Normand Seguin
+* Nguyen Tho Hau
+* Sylvie Trudel
 
 ## WEHA developers
 
