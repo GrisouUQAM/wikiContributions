@@ -1,0 +1,5 @@
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\bin\Debug\tdiff.exe.config
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\bin\Debug\tdiff.exe
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\bin\Debug\tdiff.pdb
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\obj\Debug\tdiff.exe
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\obj\Debug\tdiff.pdb
