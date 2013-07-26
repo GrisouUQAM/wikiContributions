@@ -7,23 +7,13 @@ $url = $withoutSlash[0];
 $completeUrl = "http://";
 $completeUrl.= $url;
 
-include_once( dirname(__FILE__) . "/../source/weha/WikiDiffFormatter.php");
+include_once( dirname(__FILE__) . '/diffFunctions.php');
 
-function ShowDiff($oldText, $newText){
-	//$myFile = "NewText.txt";
-	/*$fh = fopen($myFile, 'r');*/
-	//$newText = fread($fh, filesize($myFile));
-	//fclose($fh);	
-
-	//$myFile = "OldText.txt";
-	//$fh = fopen($myFile, 'r');
-	//$oldText = fread($fh, filesize($myFile));
-	//fclose($fh);
-
-	$ac = new WikiDiffFormatter($oldText, $newText);
-	$analysis = $ac->outputDiff();
-
-	return $analysis;
+function showGoogleDiff($text1, $text2) {
+	$result = Array();
+	$result = getDiff($text1, $text2);
+	$output = prettyHtml($result);
+	return $output;
 }
 
 $jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
@@ -92,8 +82,7 @@ foreach ($usercontributions as $contribution) {
 	$parsedNewText = $newTextDecoded['parse'];
 	$newTextText = $parsedNewText['text'];
 	$newText = $newTextText['*'];
-	//$analysisTable = "test";
-	$analysisTable = ShowDiff($oldText, $newText);
+	$analysisTable = showGoogleDiff($oldText, $newText);
 	
 	
 	
