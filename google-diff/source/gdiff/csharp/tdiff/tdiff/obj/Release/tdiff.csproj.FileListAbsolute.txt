@@ -3,3 +3,4 @@ C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\c
 C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\bin\Release\tdiff.pdb
 C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\obj\Release\tdiff.exe
 C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\obj\Release\tdiff.pdb
+C:\Users\poupa_000\Documents\GitHub\wikiContributions\google-diff\source\gdiff\csharp\tdiff\tdiff\obj\Release\tdiff.csprojResolveAssemblyReference.cache

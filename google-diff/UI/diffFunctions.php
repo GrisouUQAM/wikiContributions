@@ -1,17 +1,23 @@
 ﻿<?php
 function getDiff ($text1, $text2) {
-
-
-	$stringCommand = '"../source/gdiff/csharp/tdiff/tdiff/bin/Release/tdiff.exe" ';
-	$stringCommand .='"';
-	$stringCommand .= $text1;
-	$stringCommand .='" "';
-	$stringCommand .= $text2;
-	$stringCommand .='"';
-	$res = Array();
-
-	exec($stringCommand , $res);
-	
+        //Params
+        $separator = chr(30); //LF pour separer les deux texte (norme Linux/Unix)
+        $filename = 'textcomp.tmp';
+        $mode = 'w'; // Creer/ecraser le fichier existant
+        
+        //Ecriture dans le fichier temporaire
+        $file = fopen($filename, $mode);
+        fwrite($file, $text1);
+        fwrite($file, $separator);
+        fwrite($file, $text2);
+        fclose($file);
+        
+        //tdiff avec le fichier temporaire en argument
+	$stringCommand = '"../bin/tdiff.exe" ';
+        $stringCommand .= '"' . $filename . '"';
+        $res = Array();
+        exec($stringCommand, $res);
+        
 	return $res;
 }
 
@@ -31,14 +37,14 @@ function prettyHtml($diffs) {
 			}			
 			switch ($op) {
 				case "(INSERT":
-				$html .= '<ins style="background:#e6ffe6;">'.$data.'</ins>';
+				$html .= '<ins style="background:#e6ffe6;">'."INSERT".'</ins>';
 				break;
 				case "(DELETE":
-				$html .= '<del style="background:#ffe6e6;">'.$data.'</del>';
+				$html .= '<del style="background:#ffe6e6;">'.'DELETE'.'</del>';
 				break;
-				case "(EQUAL":
-				$html .= '<span>'.$data.'</span>';
-				break;
+				//case "(EQUAL":
+				//$html .= '<span>'.$data.'</span>';
+				//break;
 			}
 		}
 	}

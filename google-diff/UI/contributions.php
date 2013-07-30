@@ -13,7 +13,7 @@ function showGoogleDiff($text1, $text2) {
 	$result = Array();
 	$result = getDiff($text1, $text2);
 	$output = prettyHtml($result);
-	return $output;
+        return $output;
 }
 
 $jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
