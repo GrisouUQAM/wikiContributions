@@ -33,5 +33,6 @@ Code provided for revision comparisons comes from [Google-Diff, Match and Patch]
 
 * Neil Fraser
 * Tancred Lindholm
+
 ### Php implementation
 * Tobias Buschor
