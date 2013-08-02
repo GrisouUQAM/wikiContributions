@@ -26,6 +26,9 @@ function ShowDiff($oldText, $newText){
 	return $analysis;
 }
 
+// A user agent is required by MediaWiki API
+ini_set('user_agent', 'ProjetGrisou/1.1 (http://grisou.uqam.ca; grisou.science@gmail.com)');
+
 $jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
 $json = file_get_contents($jsonurl, true);
 
@@ -66,7 +69,7 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
 			
 foreach ($usercontributions as $contribution) {
 	$result .= '<tr><td>'.$contribution['title'].'</td>';
-	$pageId = $contribution['pageid'];
+	$pageId = $contribution['pageid']; //for Chris857 on fr.wikipedia.org, for example, there are 2 pageIds: 4330184 and 1532011
 	$revurl = $completeUrl."/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser&rvuser=".$contributor."&pageids=".$pageId."";
 	$json = file_get_contents($revurl, true);
 	$obj = json_decode($json, true);	
@@ -75,8 +78,8 @@ foreach ($usercontributions as $contribution) {
 	$revision = $pages[$pageId];
 	$userrevision = $revision['revisions'];
 	foreach($userrevision as $temp) {
-		$oldVersion = $temp['parentid'];
-		$userVersion = $temp['revid'];
+		$oldVersion = $temp['parentid']; // for Chris857 on fr.wikipedia.org, the Rivière Nicolet article for example, the parentid is 73329365
+		$userVersion = $temp['revid']; // for Chris857 on fr.wikipedia.org, the Rivière Nicolet article for example, the revid is 73631574
 		$usertimestamp = $temp['timestamp'];
 	}	
 	

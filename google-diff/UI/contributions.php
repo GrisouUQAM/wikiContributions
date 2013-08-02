@@ -16,7 +16,12 @@ function showGoogleDiff($text1, $text2) {
 	return $output;
 }
 
-$jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
+// A user agent is required by MediaWiki API
+ini_set('user_agent', 'ProjetGrisou/1.1 (http://grisou.uqam.ca; grisou.science@gmail.com)');
+
+
+///////////////////////////////////////////////////////Articles//////////////////////////////////////////////////////////////////////////////////////////
+$jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucnamespace=0%7C4%7C6%7C8&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
 $json = file_get_contents($jsonurl, true);
 
 $obj = json_decode($json, true);
@@ -41,8 +46,6 @@ $newText = "";
 $analysisTable = "";
 $result = "";
 
-$test = "";
-
 $result = '<h1>Articles which '.$contributor.' contributed to</h1>
             <table>
 				<tr>            
@@ -50,10 +53,8 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
 					<th>How long did the edit survive?</th>
 					<th>Edits</th>
 					<th>What is the value of the contribution?</th>					
-				</tr>
-				';
-
-			
+				</tr>';
+				
 foreach ($usercontributions as $contribution) {
 	$result .= '<tr><td>'.$contribution['title'].'</td>';
 	$pageId = $contribution['pageid'];
@@ -86,7 +87,7 @@ foreach ($usercontributions as $contribution) {
 	
 	
 	
-	/////////////////////////// Timestamps comparisons /////////////////////////////////////				
+	/////////////////////////// Timestamps comparisons on articles/////////////////////////////////////				
 	
 	$oldVersionTimeUrl = $completeUrl."/w/api.php?action=query&prop=info&format=json&inprop=notificationtimestamp&revids=".$oldVersion."&converttitles=";
 	$jsonSecondTimeQuery = file_get_contents($oldVersionTimeUrl, true);	
@@ -104,6 +105,33 @@ foreach ($usercontributions as $contribution) {
 	$result .= '<td>'.$timeDiffString.'</td>';
 	$result .= '<td>'.$analysisTable.'</td>';
 	$result .= '<td>Score quelconque</td></tr>';
+}
+
+$result .= '</table>
+			<h2>Total score</h2>
+			<br/>
+			<br/>';
+			
+////////////////////////////////////////////////////////////Talk////////////////////////////////////////////////////////////////////////////////
+$jsonurlTalk = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucnamespace=1%7C3%7C5%7C9&ucprop=ids%7Ctitle%7Ccomment&converttitles=";
+$jsonTalk = file_get_contents($jsonurlTalk, true);
+
+$objTalk = json_decode($jsonTalk, true);
+
+$queriesTalk = $objTalk['query'];
+$userTalks = $queriesTalk['usercontribs'];
+
+$result .= '<h1>Talks which '.$contributor.' contributed to</h1>
+            <table>
+				<tr>            
+					<th>Articles talked about</th>
+					<th>Title of the contribution-talk (topic)</th>				
+				</tr>';
+				
+foreach ($userTalks as $talk) {
+	$result .= '<tr><td>'.$talk['title'].'</td>';
+
+	$result .= '<td>'.$talk['comment'].'</td></tr>';
 }
 
 $result .= '</table>
