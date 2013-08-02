@@ -16,12 +16,12 @@ function getDiff ($text1, $text2) {
 	return $res;
 }
 
-
-function prettyHtml($diffs) {
+function prettyHtml($diffs, $lengthOfText) {
 	$equalCount = 0;
 	$deleteCount = 0;
 	$insertCount = 0;
 	$sentenceMatchingRate = 0.00;
+	$numberOfChanges = 0;
 	$results = dmp()->diff_prettyHtml($diffs);
 	for ($x = 0; $x < sizeof($diffs); $x++) {
 		switch ($diffs[$x][0]){
@@ -36,12 +36,16 @@ function prettyHtml($diffs) {
 			break;
 		}
 	}
-	$sentenceMatchingRate = $equalCount/sizeof($diffs);
+	$newDmp = new diff_match_patch();
+	$numberOfChanges = $newDmp->diff_levenshtein($diffs);
+	$sentenceMatchingRate = ($lengthOfText - $numberOfChanges)/$lengthOfText;
 	$results .= "Number of words deleted : ".$deleteCount."";
 	$results .= ("<br/>");
 	$results .= "Number of words inserted : ".$insertCount."";
 	$results .= ("<br/>");
 	$results .= "sentence matching rate : ".$sentenceMatchingRate."";
+	$results .= ("<br/>");
+	$results .= ("<br/>");
 	return $results;
 }
 

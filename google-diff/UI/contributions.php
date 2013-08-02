@@ -12,7 +12,7 @@ include_once( dirname(__FILE__) . '/diffFunctions.php');
 function showGoogleDiff($text1, $text2) {
 	$result = Array();
 	$result = getDiff($text1, $text2);
-	$output = prettyHtml($result);
+	$output = prettyHtml($result, strlen(utf8_decode($text1)));
 	return $output;
 }
 
