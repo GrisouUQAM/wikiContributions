@@ -1,3 +1,5 @@
+**LA VERSION FRANÇAISE VIENDRA BIENTÔT!**
+
 Please note that documentation for this github depository has been inspired by the [CSS Lint page] (https://github.com/stubbornella/csslint), which is truly a model open-source project. 
 
 # wikiContributions
