@@ -49,6 +49,22 @@ function prettyHtml($diffs, $lengthOfText) {
 	return $results;
 }
 
-
+function getMatch($textToMatch, $text){
+    $textLen = strlen($text);
+    $threshold = 0.33; //Threshold of 0.33 is taken from the WEHA analysis document.
+    $Dmp = new diff_match_patch();
+    $Dmp->Match_Threshold = $threshold;
+    
+    //Take only the first 32 char du to API limits
+    $sbLen = strlen($textToMatch);
+    if($sbLen > 32){
+        $sbLen = 32;
+    }
+    $pattern = substr($textToMatch, 0, $sbLen);
+    
+    $result = $Dmp->match_main($text, $pattern, $textLen);
+    //$result = $Dmp->match_main($text, $textToMatch, $textLen);
+    return $result > -1;
+}
 ?>
 

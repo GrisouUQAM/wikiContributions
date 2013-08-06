@@ -10,8 +10,7 @@ $completeUrl.= $url;
 include_once( dirname(__FILE__) . '/diffFunctions.php');
 
 function showGoogleDiff($text1, $text2) {
-	$result = Array();
-	$result = getDiff($text1, $text2);
+	$result = getDiff($text1, $text2); //Return an array of Diff objects
 	$output = prettyHtml($result, strlen(utf8_decode($text1)));
 	return $output;
 }
@@ -50,7 +49,7 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
             <table>
 				<tr>            
 					<th>Articles from '.$completeUrl.'</th>
-					<th>How long did the edit survive?</th>
+					<th>Does the contribution survive?</th>
 					<th>Edits</th>
 					<th>What is the value of the contribution?</th>					
 				</tr>';
@@ -85,24 +84,64 @@ foreach ($usercontributions as $contribution) {
 	$newText = $newTextText['*'];
 	$analysisTable = showGoogleDiff($oldText, $newText);
 	
+	/////////////////////////// Does the contribution survive? ///////////////////////////////////
+        
+        //Return the lastest revision of an article
+        $lastestRevisionQueryString = $completeUrl.'/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser%7Cuserid%7Ccontent&rvlimit=1&rvdir=older&rvparse=&pageids='.$pageId;
+        
+        $lastestRevisionJson = file_get_contents($lastestRevisionQueryString,true);
+        $lastestRevisionDecoded = json_decode($lastestRevisionJson,true);
+        
+        //JSON Obj Path: query:pages:$pageId:revisions[0] <-- only if the pageid exists
+        $lastestRevisionProps = $lastestRevisionDecoded['query']['pages'][$pageId]["revisions"][0];
+        
+        $lastestRevisionId = $lastestRevisionProps["revid"];
+        $lastestRevisionTimestamp = new DateTime($lastestRevisionProps["timestamp"]);
+        $lastestRevisionContent = $lastestRevisionProps['*'];
+        
+        $survive = FALSE;
+        
+        if($userVersion === $lastestRevisionId){
+            
+        } else {
+            //$result.='<td>'.'yes/no'.'</td>';
+            $diff_result = getDiff($newText, $lastestRevisionContent);
+            for($i = 0; $i<sizeof($diff_result);++$i)
+                switch ($diff_result[$i][0]){
+                    case 1: //If an insertion, check if still exists
+                        $survive = getMatch($lastestRevisionContent, $diff_result[$i][1]);
+                        break;
+                    default:
+                        continue;
+            }
+            if($survive) break;
+        }
+        
+        if($survive){
+            $result.= '<td>'.'Yes'.'</td>';
+        } else {
+            $result.= '<td>'.'No'.'</td>';
+        }
 	
-	
+        //Replaced by: Does the contribution survive?
 	/////////////////////////// Timestamps comparisons on articles/////////////////////////////////////				
 	
-	$oldVersionTimeUrl = $completeUrl."/w/api.php?action=query&prop=info&format=json&inprop=notificationtimestamp&revids=".$oldVersion."&converttitles=";
-	$jsonSecondTimeQuery = file_get_contents($oldVersionTimeUrl, true);	
-	$object = json_decode($jsonSecondTimeQuery, true);
-	$queries = $object['query'];
-	$pages = $queries['pages'];
-	$revision = $pages[$pageId];
-	$oldTimeStamp = $revision['touched'];
-
-	$time1 = new DateTime($usertimestamp);
-	$time2 = new DateTime($oldTimestamp);	
-
-	$dateDifference = date_diff($time1, $time2);
-	$timeDiffString = " ".$dateDifference->format('%D:%M:%S')." ";
-	$result .= '<td>'.$timeDiffString.'</td>';
+//	$oldVersionTimeUrl = $completeUrl."/w/api.php?action=query&prop=info&format=json&inprop=notificationtimestamp&revids=".$oldVersion."&converttitles=";
+//	$jsonSecondTimeQuery = file_get_contents($oldVersionTimeUrl, true);	
+//	$object = json_decode($jsonSecondTimeQuery, true);
+//	$queries = $object['query'];
+//	$pages = $queries['pages'];
+//	$revision = $pages[$pageId];
+//	$oldTimeStamp = $revision['touched'];
+//
+//	$time1 = new DateTime($usertimestamp);
+//	$time2 = new DateTime($oldTimestamp);	
+//
+//	$dateDifference = date_diff($time1, $time2);
+//	$timeDiffString = " ".$dateDifference->format('%D:%M:%S')." ";
+//	$result .= '<td>'.$timeDiffString.'</td>';
+        
+        
 	$result .= '<td>'.$analysisTable.'</td>';
 	$result .= '<td>Score quelconque</td></tr>';
 }
