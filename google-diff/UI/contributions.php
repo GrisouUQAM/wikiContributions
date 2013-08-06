@@ -49,7 +49,7 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
             <table>
 				<tr>            
 					<th>Articles from '.$completeUrl.'</th>
-					<th>Does the contribution survive?</th>
+					<th>Has the contribution survived?</th>
 					<th>Edits</th>
 					<th>What is the value of the contribution?</th>					
 				</tr>';

@@ -10,7 +10,7 @@ function dmp(){
 }
 
 function getDiff ($text1, $text2) {
-	$res = dmp()->diff_main($text1, $text2, false);	
+	$res = dmp()->diff_main(strip_tags($text1), strip_tags($text2), false);	 //strip_tags is a PHP function that removes all html tags from a string
 	$newDmp = new diff_match_patch();
 	$newDmp->diff_cleanupSemantic($res);
 	return $res;
@@ -39,6 +39,7 @@ function prettyHtml($diffs, $lengthOfText) {
 	$newDmp = new diff_match_patch();
 	$numberOfChanges = $newDmp->diff_levenshtein($diffs);
 	$sentenceMatchingRate = ($lengthOfText - $numberOfChanges)/$lengthOfText;
+	$results .= ("<br/>");
 	$results .= "Number of words deleted : ".$deleteCount."";
 	$results .= ("<br/>");
 	$results .= "Number of words inserted : ".$insertCount."";
