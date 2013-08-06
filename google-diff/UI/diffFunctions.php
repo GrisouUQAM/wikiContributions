@@ -44,7 +44,7 @@ function prettyHtml($diffs, $lengthOfText) {
 	$results .= ("<br/>");
 	$results .= "Number of words inserted : ".$insertCount."";
 	$results .= ("<br/>");
-	$results .= "sentence matching rate : ".$sentenceMatchingRate."";
+	$results .= "Text matching rate : ".$sentenceMatchingRate."";
 	$results .= ("<br/>");
 	$results .= ("<br/>");
 	return $results;
