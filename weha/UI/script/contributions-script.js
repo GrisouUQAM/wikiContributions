@@ -1,7 +1,7 @@
 function sendForm() {
 	var sent = false;
-	var us = document.getElementById("user").value;
-	var ur = document.getElementById("url").value;
+	var us = $("#user").val();
+	var ur = $("#url").val();
 	
 	
 	$.get("contributions.php", { user: us, wiki: ur}, function (data) {
