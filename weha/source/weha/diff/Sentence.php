@@ -9,9 +9,9 @@ class Sentence {
 	
 	public function __construct()
 	{
-		$tokens = null;
-		$startPos = -1;
-		$endPos = -1;
-		$length = 0;
+		$this->tokens = null;
+		$this->startPos = -1;
+		$this->endPos = -1;
+		$this->length = 0;
 	}
 }
