@@ -19,8 +19,10 @@ Code provided for revision comparisons comes from [Google-Diff, Match and Patch]
 
 ## Developers
 
+* André Grégoire
 * Genevieve Lalonde, http://www.genevievelalonde.com
 * Alexandre Poupart
+* Alexandre Sforza
 
 ## Contributors
 
