@@ -14,7 +14,6 @@ function sendForm() {
 	    labels.push($("th", this).text());
 	});
 	$("#result").fadeIn(500);
-    }
-    );
+    });
     return sent;
 }
