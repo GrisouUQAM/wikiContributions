@@ -1,0 +1,30 @@
+@startuml
+Class Afficheur {
+    String data
+    void methode()
+}
+
+Class Traitement {
+    String data
+    void methode()
+}
+
+
+Class Colonne {
+    String data
+    void methode()
+}
+
+
+
+
+Class Donnees {
+    String data
+    void methode()
+}
+
+
+
+
+@enduml
+		

@@ -1,0 +1,5 @@
+@startuml
+:utilisateur:
+usecase UC1 as "obtenir sa cote de contributeur"
+utilisateur --> UC1
+@enduml

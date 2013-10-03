@@ -1,2 +1,14 @@
 Dossier dans lequel nous mettrons la documentation UML
 Nous utiliserons PlantUML comme outil pour le développement collaboratif
+
+Sous Netbeans et Eclipse il est possible (et ça vaut vraiment la peine sous Net Beans) d'installer le plugin PlantUML
+
+Sinon : http://plantuml.sourceforge.net
+
+Pour utiliser plantUML de façon visuelle, il faut installer Graphviz
+
+http://www.graphviz.org/Download..php
+
+Instruction pour Graphviz : http://plantuml.sourceforge.net/graphvizdot.html
+
+Instruction pour plantUML : http://plantuml.sourceforge.net/index.html
