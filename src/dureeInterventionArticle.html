@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Grisou | Durée Intervention Article </title>
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="script/jquery-1.8.2.min.js"></script>
+        <script src="script/contributions-script.js"></script>
+	</head>
+	<body>
+	    <header>
+			<h1>Survie d'une intervention!</h1>
+		</header>
+			<nav>
+				<ul>
+				   <li><a href="./index.html">Accueil</a></li>
+					<li><a href="./dureeInterventionArticle.html">3-1 Durée en jour</a></li>
+					<li>link</li>
+					<li/>
+				</ul>
+			</nav>	
+			 <section id="question">
+				<h2>Entrer le titre de l'article :</h2> <input id="spellcheckinput" onkeyup="getjs (this.value);" type="text" />
+				<h2>Enter the username of the contributor:</h2>
+				<input type="text"  id="user" />
+				<div id="blocurl">
+				<h2>Enter the url for the wikipedia web site the contributor has contributed to (without the http://) :</h2>
+				<input type="text"  id="url" value="fr.wikipedia.org" /><button onclick="sendFormIntervention()">Send</button><span id="queryloading"></span></div>
+			 </section>		
+			<section id="result">
+				
+			</section>			
+	</body>
+</html>

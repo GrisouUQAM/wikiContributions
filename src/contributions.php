@@ -2,6 +2,7 @@
 $contributor = $_GET["user"];
 $wikiurl = $_GET["wiki"];
 
+
 $withoutSlash = explode('/', $wikiurl);
 $url = $withoutSlash[0];
 $completeUrl = "http://";
@@ -11,6 +12,7 @@ include_once( dirname(__FILE__) . '/diffFunctions.php');
 
 function showGoogleDiff($text1, $text2) {
 	$result = getDiff($text1, $text2); //Return an array of Diff objects
+	
 	$output = prettyHtml($result, strlen(utf8_decode($text1)));
 	return $output;
 }
@@ -21,6 +23,7 @@ function showGoogleDiff($text1, $text2) {
 
 ///////////////////////////////////////////////////////Articles//////////////////////////////////////////////////////////////////////////////////////////
 $jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucnamespace=0%7C4%7C6%7C8&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
+echo $jsonurl;
 $json = file_get_contents($jsonurl, true);
 
 $obj = json_decode($json, true);
