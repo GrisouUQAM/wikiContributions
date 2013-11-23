@@ -22,9 +22,6 @@ header h1 {
 #result {
 	display: none;
 }
-#result1 h2 {
-	  width: 940px;
-}
 
 #user, #url {
     width: 600px; 
