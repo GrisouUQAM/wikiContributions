@@ -1,0 +1,84 @@
+@startuml
+
+note "Avoir une strategie qui decoule \nautomatiquement du wiki ou la contribution \na ete publiee" as NoteStrategie
+NoteStrategie .. Wiki
+NoteStrategie .. GoogleDiffMatchPatch
+
+Class Wiki{
+string connection
+string url
+void defineContribution()
+void retreiveContribution()
+}
+
+Class Revision{
+string pageId
+string revURL
+string json
+string pages
+string revision
+string userRevision
+string oldRevision
+string userTimeStamp
+bool minorEdit
+}
+Revision --|> Wiki
+
+Class Talk{
+string title
+string comment
+}
+Talk --|> Revision
+
+Class Contributor{
+string userName
+string userId
+string score
+}
+Contributor o-- Revision
+
+Class ContributionAnalyserStrategy{
+-string[] tokenize(Text)
+bool hasSurvived()
+string lastestRevisionTimeStamp()
+string howLongContributionSurvived()
+bool hasGeneratedContribution()
+int howManyRead()
+}
+Contributor ..|> ContributionAnalyserStrategy
+
+Class GoogleDiffMatchPatch{
+voir documentation
+}
+ContributionAnalyserStrategy ..|> GoogleDiffMatchPatch
+
+Class PersistanceContributor{
+}
+Contributor ..|> PersistanceContributor
+
+Abstract Class Output{
+
+}
+Contributor ..|> Output
+
+Class Graph #red{
+}
+Graph --|> Output
+
+Class html{
+}
+html --|> Output
+
+Class json{
+}
+json --|> Output
+
+Class xml #red{
+}
+xml --|> Output
+
+Class pdf #red{
+}
+pdf --|> Output
+
+@enduml
