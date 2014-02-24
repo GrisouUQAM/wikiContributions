@@ -1,5 +1,7 @@
 # INF6150 A2013
 
+INF6150 Génie logiciel: conduite de projets informatiques
+
 # Équipe JAVUM
 
 # Membres de l'équipe
