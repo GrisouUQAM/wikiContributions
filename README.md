@@ -13,7 +13,9 @@ Membres de l'équipe
 
 # Objectifs
 
-Non disponible au moment de la mise sous presse.
+3.	Survie d’une intervention
+3.1.	Calculer la durée, en jours, depuis une intervention sur un article.
+3.2.	Calculer le nombre d’interventions par d’autres personnes depuis une intervention sur un article.
 
 # Conditions
 
