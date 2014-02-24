@@ -81,6 +81,7 @@ td {
     margin: 10px;
 	font-size: 1.0em;
     line-height: 1.4em;
+    vertical-align:top;
 }
 
 th{
@@ -94,6 +95,11 @@ th{
 
 .articles li {
 	list-style-type: circle;
+}
+
+.scroll {
+    height: 200px;
+    overflow:scroll;
 }
 
 #holder{
