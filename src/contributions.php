@@ -8,9 +8,12 @@ $completeUrl = "http://";
 $completeUrl.= $url;
 
 include_once( dirname(__FILE__) . '/diffFunctions.php');
+include_once( dirname(__FILE__) . '/deplacements.php');
 
 function showGoogleDiff($text1, $text2) {
 	$result = getDiff($text1, $text2); //Return an array of Diff objects
+        $deplac = new Deplacement($result);
+        $result = $deplac->getDeplacement();
 	$output = prettyHtml($result, strlen(utf8_decode($text1)));
 	return $output;
 }
