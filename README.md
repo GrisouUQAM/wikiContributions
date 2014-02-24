@@ -1,6 +1,6 @@
 # INF6150 A2013
 
-# Version équipe ASSA
+# Équipe ASSA
 
 # Membres de l'équipe
 
@@ -33,13 +33,6 @@ Prenez note que la documentation de ce dépôt github a été inspirée par la p
 * Robert Dupuis
 * Anne Goldenberg
 * Louise Laforest
-
-## Développeurs
-
-* André Grégoire
-* Genevieve Lalonde, http://www.genevievelalonde.com
-* Alexandre Poupart
-* Alexandre Sforza
 
 ## Contributeurs
 
