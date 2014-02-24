@@ -1,45 +1,21 @@
-**LA VERSION FRANÇAISE EST PLUS BAS**
+# INF6150 A2013
 
-Please note that documentation for this github depository has been inspired by the [CSS Lint page] (https://github.com/stubbornella/csslint), which is truly a model open-source project. 
+# Version équipe ASSA
 
-# wikiContributions
+# Membres de l'équipe
 
-wikiContributions is a tool to help scientists get recognition for their contributions to scientific wikis. We believe that eventually, scientific wikis will replace the conventional scientific articles published in expensive and non-collaborative magazines. When this will happen, it will be harder for a member of the scientific community to mention what articles he/she has contributed to in his/her resume, since wiki contributions are collaborative and can be anything from a comma to a whole article. We aim to provide a measurement tool for this, and our project is well under way. You can find information about both using wikiContributions and contributing to the project in the wiki help page : https://github.com/GrisouUQAM/wikiContributions/wiki/English. 
-The code uses code provided by **Google-Diff, Match and Patch** for revision comparisons (found in the `google-diff` folder).
+* A
+* B
+* C
+* D
 
-**If you wish to edit parts of this code, we will gladly add you as a contributor. All you need to do is write a comment in the [issue] (https://github.com/GrisouUQAM/wikiContributions/issues) you are interested in!**
+# Objectifs
 
-# Contributors
+Non disponible au moment de la mise sous presse.
 
-## Creators
+# Conditions
 
-* Robert Dupuis
-* Anne Goldenberg
-* Louise Laforest
-
-## Developers
-
-* André Grégoire
-* Genevieve Lalonde, http://www.genevievelalonde.com
-* Alexandre Poupart
-* Alexandre Sforza
-
-## Contributors
-
-* Laurence Loiselle Dupuis
-* Melanie Lord
-* Daniel Memmi
-* Normand Seguin
-* Nguyen Tho Hau
-* Sylvie Trudel
-
-
-
-_______________________________
-FRANÇAIS
-_______________________________
-
-Prenez note que la documentation de ce dépôt github a été inspirée par la page de [CSS Lint] (https://github.com/stubbornella/csslint), qui est un vrai modèle de projet ouvert.
+Il est préférable de ne pas faire de commit dans cette branche.  Le code est a titre de référence seulement.
 
 # wikiContributions
 
@@ -47,11 +23,12 @@ wikiContributions est un outil visant à aider les scientifiques à obtenir de l
 https://github.com/GrisouUQAM/wikiContributions/wiki/Fran%C3%A7ais. 
 Notre projet utilise le code fourni par **Google-Diff, Match and Patch** pour faire la comparaison de différentes révisions (que vous trouverez dans le dossier `google-diff`).
 
+Prenez note que la documentation de ce dépôt github a été inspirée par la page de [CSS Lint] (https://github.com/stubbornella/csslint), qui est un vrai modèle de projet ouvert.
+
 **Si vous souhaitez modifier des parties de ce code, nous serons heureux de vous ajouter à nos collaborateurs. Vous n'avez qu'à laisser un commentaire dans la [question/problème] (https://github.com/GrisouUQAM/wikiContributions/issues) qui vous intéresse!**
 
-# Contributeurs
 
-## Créateurs
+## Initiateurs / Créateurs
 
 * Robert Dupuis
 * Anne Goldenberg
