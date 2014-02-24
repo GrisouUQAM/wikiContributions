@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 require_once('diff_match_patch.php');
 
 function dmp(){
