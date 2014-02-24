@@ -1,8 +1,10 @@
 # INF6150 A2013
 
+INF6150 Génie logiciel: conduite de projets informatiques
+
 # Équipe ASSA
 
-# Membres de l'équipe
+Membres de l'équipe
 
 * A
 * B
