@@ -89,15 +89,16 @@ foreach ($usercontributions as $contribution) {
         //Return the lastest revision of an article
         $lastestRevisionQueryString = $completeUrl.'/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser%7Cuserid%7Ccontent&rvlimit=1&rvdir=older&rvparse=&pageids='.$pageId;
         
-        $lastestRevisionJson = file_get_contents($lastestRevisionQueryString,true);
+        $lastestRevisionJson = file_get_contents($lastestRevisionQueryString,true);		               
         $lastestRevisionDecoded = json_decode($lastestRevisionJson,true);
         
         //JSON Obj Path: query:pages:$pageId:revisions[0] <-- only if the pageid exists
         $lastestRevisionProps = $lastestRevisionDecoded['query']['pages'][$pageId]["revisions"][0];
         
+        
         $lastestRevisionId = $lastestRevisionProps["revid"];
         $lastestRevisionTimestamp = new DateTime($lastestRevisionProps["timestamp"]);
-        $lastestRevisionContent = $lastestRevisionProps['*'];
+        $lastestRevisionContent = $lastestRevisionProps['*'];		      
         
         $survive = FALSE;
         
