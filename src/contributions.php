@@ -8,11 +8,38 @@ $completeUrl = "http://";
 $completeUrl.= $url;
 
 include_once( dirname(__FILE__) . '/diffFunctions.php');
+include_once( dirname(__FILE__) . '/library/dateConverter.php');
 
 function showGoogleDiff($text1, $text2) {
 	$result = getDiff($text1, $text2); //Return an array of Diff objects
 	$output = prettyHtml($result, strlen(utf8_decode($text1)));
 	return $output;
+}
+
+function returnJsonOutput($url) {
+	$json = file_get_contents($url, true);
+	return json_decode($json, true);
+}
+
+function countTotalIntervention($user, $title, $timestamp, $completeUrl) {
+    $jsonurl = $completeUrl."/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp&rvlimit=500&rvstart=".$timestamp."&rvdir=newer&rvexcludeuser=".$user."&titles=".$title;
+    $obj = returnJsonOutput($jsonurl);
+    $queries = $obj['query'];
+    $pages = $queries['pages'];
+    foreach ($pages as $page) {
+        if(isset($page['revisions'])){
+            $revisions = $page['revisions'];
+            $nbElement = count($revisions);
+            if(isset($obj['query-continue']['revisions']['rvcontinue'])){
+                return countTotalIntervention($user, $title, $revisions[$nbElement-1]['timestamp'], $completeUrl) + $nbElement;
+            }else{
+                return $nbElement;
+            }
+        }else{
+            return 0;
+        }
+    }
+    
 }
 
 // A user agent is required by MediaWiki API
@@ -21,9 +48,8 @@ function showGoogleDiff($text1, $text2) {
 
 ///////////////////////////////////////////////////////Articles//////////////////////////////////////////////////////////////////////////////////////////
 $jsonurl = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucnamespace=0%7C4%7C6%7C8&ucprop=ids%7Ctitle%7Ctitle&converttitles=";
-$json = file_get_contents($jsonurl, true);
 
-$obj = json_decode($json, true);
+$obj = returnJsonOutput($jsonurl);
 
 $queries = $obj['query'];
 $usercontributions = $queries['usercontribs'];
@@ -51,15 +77,15 @@ $result = '<h1>Articles which '.$contributor.' contributed to</h1>
 					<th>Articles from '.$completeUrl.'</th>
 					<th>Has the contribution survived?</th>
 					<th>Edits</th>
-					<th>What is the value of the contribution?</th>					
+					<th>What is the value of the contribution?</th>
+					<th>Number of days</th>
 				</tr>';
 				
-foreach ($usercontributions as $contribution) {
+foreach ($usercontributions as $pos => $contribution) {
 	$result .= '<tr><td>'.$contribution['title'].'</td>';
 	$pageId = $contribution['pageid'];
 	$revurl = $completeUrl."/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser&rvuser=".$contributor."&pageids=".$pageId."";
-	$json = file_get_contents($revurl, true);
-	$obj = json_decode($json, true);	
+	$obj = returnJsonOutput($revurl);
 	$queries = $obj['query'];
 	$pages = $queries['pages'];
 	$revision = $pages[$pageId];
@@ -67,30 +93,27 @@ foreach ($usercontributions as $contribution) {
 	foreach($userrevision as $temp) {
 		$oldVersion = $temp['parentid'];
 		$userVersion = $temp['revid'];
-		$usertimestamp = $temp['timestamp'];
 	}	
 	
 	$oldRevisionContent = $completeUrl."/w/api.php?action=parse&format=json&oldid=".$oldVersion."&prop=text";
-	$jsonOld = file_get_contents($oldRevisionContent, true);
-	$oldTextDecoded = json_decode($jsonOld, true);	
+	$oldTextDecoded = returnJsonOutput($oldRevisionContent);
 	$parsedOldText = $oldTextDecoded['parse'];
 	$oldTextText = $parsedOldText['text'];
 	$oldText = $oldTextText['*'];
 	$userRevisionContent = $completeUrl."/w/api.php?action=parse&format=json&oldid=".$userVersion."&prop=text";
-	$jsonNew = file_get_contents($userRevisionContent, true);
-	$newTextDecoded = json_decode($jsonNew, true);	
+	$newTextDecoded = returnJsonOutput($userRevisionContent, true);	
 	$parsedNewText = $newTextDecoded['parse'];
 	$newTextText = $parsedNewText['text'];
 	$newText = $newTextText['*'];
 	$analysisTable = showGoogleDiff($oldText, $newText);
+        $analysisTable.= "Number of intervention since ".$userrevision[0]['timestamp'].": ".countTotalIntervention($contributor, $contribution['title'], $userrevision[0]['timestamp'], $completeUrl);
 	
 	/////////////////////////// Does the contribution survive? ///////////////////////////////////
         
         //Return the lastest revision of an article
         $lastestRevisionQueryString = $completeUrl.'/w/api.php?action=query&prop=revisions&format=json&rvprop=ids%7Ctimestamp%7Cuser%7Cuserid%7Ccontent&rvlimit=1&rvdir=older&rvparse=&pageids='.$pageId;
         
-        $lastestRevisionJson = file_get_contents($lastestRevisionQueryString,true);
-        $lastestRevisionDecoded = json_decode($lastestRevisionJson,true);
+        $lastestRevisionDecoded = returnJsonOutput($lastestRevisionQueryString,true);
         
         //JSON Obj Path: query:pages:$pageId:revisions[0] <-- only if the pageid exists
         $lastestRevisionProps = $lastestRevisionDecoded['query']['pages'][$pageId]["revisions"][0];
@@ -140,10 +163,14 @@ foreach ($usercontributions as $contribution) {
 //	$dateDifference = date_diff($time1, $time2);
 //	$timeDiffString = " ".$dateDifference->format('%D:%M:%S')." ";
 //	$result .= '<td>'.$timeDiffString.'</td>';
-        
-        
-	$result .= '<td>'.$analysisTable.'</td>';
-	$result .= '<td>Score quelconque</td></tr>';
+    
+    $usertimestamp = $userrevision[$pos]['timestamp'];
+    $userDate = strtotime($usertimestamp);
+    $dayDiff = dateConverter(substructDate($userDate));
+
+	$result .= '<td><p class="scroll">'.$analysisTable.'</p></td>';
+	$result .= '<td>Score quelconque</td>';
+	$result .= '<td>'.$dayDiff.'</td></tr>';
 }
 
 $result .= '</table>
@@ -153,9 +180,8 @@ $result .= '</table>
 			
 ////////////////////////////////////////////////////////////Talk////////////////////////////////////////////////////////////////////////////////
 $jsonurlTalk = $completeUrl."/w/api.php?action=query&list=usercontribs&format=json&ucuser=".$contributor."&ucnamespace=1%7C3%7C5%7C9&ucprop=ids%7Ctitle%7Ccomment&converttitles=";
-$jsonTalk = file_get_contents($jsonurlTalk, true);
 
-$objTalk = json_decode($jsonTalk, true);
+$objTalk = returnJsonOutput($jsonurlTalk);
 
 $queriesTalk = $objTalk['query'];
 $userTalks = $queriesTalk['usercontribs'];
