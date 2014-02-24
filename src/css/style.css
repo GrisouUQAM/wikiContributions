@@ -23,7 +23,7 @@ header h1 {
 	display: none;
 }
 
-#user, #url {
+#user, #url, #articleName {
     width: 600px; 
 }
 
