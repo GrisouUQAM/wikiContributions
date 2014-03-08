@@ -19,7 +19,7 @@ Membres de l'équipe
 
 ### Idée
 
-* Il est plus simple et plus rapide d'utiliser les ordinateurs et le navigateur de chaque utilisateur pour faire les calculs et ainsi distribuer la charge au lieu de la garder dans le server php.
+* Il est plus simple et plus rapide d'utiliser les ordinateurs et le navigateur de chaque utilisateur pour faire les calculs et ainsi distribuer la charge au lieu de la garder dans le serveur php.
 
 ### Spécifique
 
