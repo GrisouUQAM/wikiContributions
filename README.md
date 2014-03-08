@@ -1,6 +1,41 @@
-**LA VERSION FRANÇAISE EST PLUS BAS**
+#  WikiContributions II JS
 
-Please note that documentation for this github depository has been inspired by the [CSS Lint page] (https://github.com/stubbornella/csslint), which is truly a model open-source project. 
+## INF6150 A2013
+
+INF6150 Génie logiciel: conduite de projets informatiques
+
+## Équipe VOGG
+
+Membres de l'équipe
+
+* Victor Bitca
+* Olivier Charrier
+* Guillaume Lahaie
+* Guy Francoeur
+
+## Objectifs
+
+* Une application http://ialex.ca/reconnaissance existait. Nous avons eu comme mandat de la modifier pour y ajouter des fonctionnalités.  Au lieu de cela mon avons opté pour une preuve de concept qui aurait pour but premier : regler un problème d'architecture conceptuelle et de vitesse. 
+
+### Idée
+
+* Il est plus simple et plus rapide d'utiliser les ordinateurs et le navigateur de chaque utilisateur pour faire les calculs et ainsi distribuer la charge au lieu de la garder dans le serveur php.
+
+### Spécifique
+
+* Refaire l'application original php de wikiContributions (GRISOU) en JavaScript, JQuery (Ajax)
+* Donner un look et contruire un framework visuel éventuellement adaptable.
+* Ajouter le retreive progressif des articles d'un contributeur.
+* Ajouter le total score des article qui sont dans la liste (valeur absolut de size diff).
+* Ajouter l'onglet Talk.
+* Ajouter la distance d'édition (Levensthein distance).
+* Ajouter la recherche avancée.
+* Ajouter des informations sur les contributions:
+  * la grosseur en char de l'article.
+  * la difference en char entre l'article précédent et ma contribution.
+  * Ajouter la date de la contribution dans cet article.
+
+----------------------------------------------------------
 
 # wikiContributions
 
@@ -9,37 +44,9 @@ The code uses code provided by **Google-Diff, Match and Patch** for revision com
 
 **If you wish to edit parts of this code, we will gladly add you as a contributor. All you need to do is write a comment in the [issue] (https://github.com/GrisouUQAM/wikiContributions/issues) you are interested in!**
 
-# Contributors
+Please note that documentation for this github depository has been inspired by the [CSS Lint page] (https://github.com/stubbornella/csslint), which is truly a model open-source project.
 
-## Creators
-
-* Robert Dupuis
-* Anne Goldenberg
-* Louise Laforest
-
-## Developers
-
-* André Grégoire
-* Genevieve Lalonde, http://www.genevievelalonde.com
-* Alexandre Poupart
-* Alexandre Sforza
-
-## Contributors
-
-* Laurence Loiselle Dupuis
-* Melanie Lord
-* Daniel Memmi
-* Normand Seguin
-* Nguyen Tho Hau
-* Sylvie Trudel
-
-
-
-_______________________________
-FRANÇAIS
-_______________________________
-
-Prenez note que la documentation de ce dépôt github a été inspirée par la page de [CSS Lint] (https://github.com/stubbornella/csslint), qui est un vrai modèle de projet ouvert.
+---------------------------------------------------------
 
 # wikiContributions
 
@@ -49,22 +56,19 @@ Notre projet utilise le code fourni par **Google-Diff, Match and Patch** pour fa
 
 **Si vous souhaitez modifier des parties de ce code, nous serons heureux de vous ajouter à nos collaborateurs. Vous n'avez qu'à laisser un commentaire dans la [question/problème] (https://github.com/GrisouUQAM/wikiContributions/issues) qui vous intéresse!**
 
-# Contributeurs
+Prenez note que la documentation de ce dépôt github a été inspirée par la page de [CSS Lint] (https://github.com/stubbornella/csslint), qui est un vrai modèle de projet ouvert.
 
-## Créateurs
+--------------------------------------------------------
+
+## Membres GRISOU
+
+### Initiateurs
 
 * Robert Dupuis
 * Anne Goldenberg
 * Louise Laforest
 
-## Développeurs
-
-* André Grégoire
-* Genevieve Lalonde, http://www.genevievelalonde.com
-* Alexandre Poupart
-* Alexandre Sforza
-
-## Contributeurs
+### Contributeurs
 
 * Laurence Loiselle Dupuis
 * Melanie Lord
