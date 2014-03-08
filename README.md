@@ -15,7 +15,7 @@ Membres de l'équipe
 
 ## Objectifs
 
-* Une application http://ialex.ca/reconnaissance existait. Nous avons eu comme mandat de la modifier pour y ajouter des fonctionnalités.  Au lieu de cela mon avons opté pour une preuve de concept qui aurait pour but premier : regler un problème d'architecture conceptuelle et de vitesse. Le reste suivit.
+* Une application http://ialex.ca/reconnaissance existait. Nous avons eu comme mandat de la modifier pour y ajouter des fonctionnalités.  Au lieu de cela mon avons opté pour une preuve de concept qui aurait pour but premier : regler un problème d'architecture conceptuelle et de vitesse. Il est plus simple et plus rapide d'utiliser les orinateurs et le navigateur de chaque utilisateur pour faire les calcul et ainsi distribuer la charge au lieu de la garder dans le server php.
 
 ### Spécifique
 
